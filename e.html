@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue Playground</title>
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <reversible-message starting-message="Hello Josh"></reversible-message>
+            <reversible-message starting-message="Hello Lille"></reversible-message>
+            <reversible-message starting-message="Hello Bennett"></reversible-message>
+        </div>
+
+        <script type="text/javascript">
+            Vue.component('reversible-message', {
+                props: {
+                    startingMessage: String,
+                },
+                data() { return {
+                    message: this.startingMessage,
+                }},
+                template: `
+                    <div>
+                        <p>{{ message }}</p>
+                        <button v-on:click="reverseMessage">Reverse Message</button>
+                    </div>
+                `,
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    },
+                },
+            });
+
+            var app = new Vue({ el: "#app" });
+        </script>
+    </body>
+</html>
